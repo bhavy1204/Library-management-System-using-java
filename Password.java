@@ -49,7 +49,7 @@ public class Password {
     }
 
     public static void saveUserName(String hashedUserName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("UserName.txt"))) {
             writer.write(hashedUserName);
         } catch (IOException e) {
             System.out.println("Error saving password: " + e.getMessage());

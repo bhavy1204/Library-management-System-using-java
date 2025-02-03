@@ -45,7 +45,46 @@ class books {
 
 class Admin {
 
-    private ArrayList<books> books = new ArrayList<>();
+    public ArrayList<books> books = new ArrayList<>();
+
+    public void menu(Scanner input) {
+        int Adminchoice = 0;
+        do {
+            System.out.println("----Welcome to Admin Panel----");
+            System.out.println("1. Add Book(s) ");
+            System.out.println("2. Remove Book(s) ");
+            System.out.println("3. View book(s) ");
+            System.out.println("4. See Due book(s) ");
+            System.out.println("5. Exit ");
+            System.out.print(">>> ");
+            while (!input.hasNextInt()) {
+                System.out.println("Please enter a valid choice ");
+                input.nextLine();
+                System.out.print(">>> ");
+            }
+            Adminchoice = input.nextInt();
+            switch (Adminchoice) {
+                case 1:
+                    addBook(input);    
+                    break;
+                case 2:
+                    removeBook(input);
+                    break;
+                case 3:
+                    viewBook(input);
+                    break;
+                case 4:
+                    dueBooks();
+                    break;
+                case 5:
+                    System.out.println("EXITING...");
+                    break;
+                default:
+                    break;
+            }
+        } while (Adminchoice != 5);
+
+    }
 
     public boolean authenticate(Scanner input) {
 
@@ -62,7 +101,7 @@ class Admin {
         String storedPassword = Password.getStoredPassword();
 
         // Get stpred username for admin
-        String storedUserName = Password.getStoredPassword();
+        String storedUserName = Password.getStoredUserName();
 
         if (storedPassword != null && storedUserName.equals(hashedEntereduserName)
                 && storedPassword.equals(hashedEnteredPassword))
@@ -100,8 +139,23 @@ class Admin {
         }
     }
 
-    public void viewBook() {
+    public void viewBook(Scanner input) {
+        String n;
+        System.out.println("ENter name of the book : ");
+        n = input.nextLine();
 
+        Iterator<books> it = books.iterator();
+        boolean found = false;
+        while (it.hasNext()) {
+            books b = it.next();
+            if (b.getName().equalsIgnoreCase(n)) {
+                b.show();
+                found = true;
+            }
+        }
+        if (found == false) {
+            System.out.println("No book found with name \"" + n + "\" ");
+        }
     }
 
     public void dueBooks() {
@@ -113,7 +167,6 @@ public class LMS {
 
     public static void main(String args[]) {
         library l = new library();
-        l.Greet();
         Scanner input = new Scanner(System.in);
         Admin admin = new Admin();
         // if ( admin.authenticate(input)) {
@@ -126,6 +179,7 @@ public class LMS {
             System.out.println("Select any choice :- ");
             System.out.println("1. Admin ");
             System.out.println("2. User ");
+            System.out.println("3. Exit ");
             System.out.print(">>> ");
 
             // To check for numeric inputs only
@@ -142,7 +196,17 @@ public class LMS {
                     System.out.print("Do you want to set a new admin password? (yes/no): ");
                     String choice = input.nextLine().toLowerCase();
 
-                    if (choice.equals("yes")) {
+                    if (choice.equalsIgnoreCase("yes")) {
+                        // For new userName
+                        System.out.print("Enter new UserName : ");
+                        String newUserName = input.nextLine();
+
+                        String hashedUserName = Password.hashUsername(newUserName);
+                        Password.saveUserName(hashedUserName);
+
+                        System.out.println("UserName set successfully!");
+
+                        // For setting new password
                         System.out.print("Enter new password: ");
                         String newPassword = input.nextLine();
 
@@ -151,16 +215,9 @@ public class LMS {
 
                         System.out.println(" Password set successfully!");
 
-                        System.out.print("Enter new UserName : ");
-                        String newUserName = input.nextLine();
-
-                        String hashedUserName = Password.hashUsername(newUserName);
-                        Password.saveUserName(hashedUserName);
-
-                        System.out.println("UserName set successfully!");
                     } else {
                         if (admin.authenticate(input))
-                            System.out.print("all ok ");
+                            admin.menu(input);
                         else
                             System.out.print("all not ok ");
                     }
@@ -176,7 +233,7 @@ public class LMS {
                     System.out.println("Invalid choice.. Please Select from given options ");
                     break;
             }
-        } while (Mchoice != 4);
+        } while (Mchoice != 3);
 
         input.close();
     }
