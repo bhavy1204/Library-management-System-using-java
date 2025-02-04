@@ -10,6 +10,18 @@ class library {
     }
 }
 
+
+class User{
+    private String userName;
+    private long contact;
+    private String address;
+
+    void setDetails(Scanner input){
+        input.nextLine();
+    }
+}
+
+
 class books {
     private String Name;
     private float price;
@@ -18,6 +30,7 @@ class books {
     private int quantity;
 
     void set(Scanner input) {
+        input.nextLine();
         System.out.println("Enter Name of Book : ");
         this.Name = input.nextLine();
         System.out.println("Enter Author of Book : ");
@@ -118,6 +131,7 @@ class Admin {
 
     public void removeBook(Scanner input) {
         String n;
+        input.nextLine();
         System.out.print("ENter Name of the book : ");
         n = input.nextLine();
 
@@ -141,6 +155,7 @@ class Admin {
 
     public void viewBook(Scanner input) {
         String n;
+        input.nextLine();
         System.out.println("ENter name of the book : ");
         n = input.nextLine();
 
@@ -153,9 +168,8 @@ class Admin {
                 found = true;
             }
         }
-        if (found == false) {
+        if (found == false)
             System.out.println("No book found with name \"" + n + "\" ");
-        }
     }
 
     public void dueBooks() {
