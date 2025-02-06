@@ -38,19 +38,34 @@ class User {
     }
 
 
-    void borrowBooks(){
-
+    void borrowBooks(Scanner input,Admin a){
+        input.nextLine();
+        System.out.print("Enter Name of the book : ");
+        String temp = input.nextLine();
+        System.out.print("Enter ISBN number of book : ");
+        int tempISBN= input.nextInt();
+        Iterator<books> it = a.Allbooks.iterator();
+        while (it.hasNext()){
+            books b = it.next();
+            if (b.getName().equalsIgnoreCase(temp) && b.getISBN() == tempISBN) {
+                if (b.getQuantity()>0) {
+                    borrowedBooks.add(b);
+                    b.setQuantity(b.getQuantity() -1 );
+                }else{
+                    System.out.println("Sorry, The book is not avaialble right now");
+                }
+            }
+        }
     }
 
     void showBorrowedBooks() {
-        Iterator<books> it = borrowedBooks.iterator();
-        if (!it.hasNext()) {
+        if (borrowedBooks.isEmpty()) {
             System.out.println("No books borrowed");
+            return;
         }else{
-            while (it.hasNext()){
-                books b = it.next();
+            for (books b : borrowedBooks) {
                 b.show();
-            }
+            }   
         }
     }
 }
@@ -82,10 +97,23 @@ class books {
         System.out.println("Price : " + this.price);
         System.out.println("ISBN : " + this.ISBN);
         System.out.println("Quantity : " + this.quantity);
+        System.out.println("---------------------------------------------------------------------");
     }
 
     String getName() {
         return this.Name;
+    }
+    int getISBN(){
+        return this.ISBN;
+    }
+    int getQuantity(){
+        return this.quantity;
+    }
+    void setQuantity(int a){
+        if (a>=0)
+            this.quantity=a;
+        else
+            System.out.println("INVALID NUMBER ! ");
     }
 }
 
