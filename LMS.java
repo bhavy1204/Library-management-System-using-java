@@ -10,17 +10,50 @@ class library {
     }
 }
 
-
-class User{
+class User {
     private String userName;
-    private long contact;
+    private long contactNo;
+    private String mail;
     private String address;
 
-    void setDetails(Scanner input){
+    private ArrayList<books> borrowedBooks = new ArrayList<>();
+
+    void setDetails(Scanner input) {
         input.nextLine();
+        System.out.print("Enter Name : ");
+        this.userName = input.nextLine();
+        System.out.print("Enter mail : ");
+        this.mail = input.nextLine();
+        System.out.print("Enter address : ");
+        this.address = input.nextLine();
+        System.out.print("Enter contact number : ");
+        this.contactNo = input.nextLong();
+    }
+
+    void show() {
+        System.out.println("Name : " + this.userName);
+        System.out.println("E-mail " + this.mail);
+        System.out.println("Contact number : " + this.contactNo);
+        System.out.println("Address : " + this.address);
+    }
+
+
+    void borrowBooks(){
+
+    }
+
+    void showBorrowedBooks() {
+        Iterator<books> it = borrowedBooks.iterator();
+        if (!it.hasNext()) {
+            System.out.println("No books borrowed");
+        }else{
+            while (it.hasNext()){
+                books b = it.next();
+                b.show();
+            }
+        }
     }
 }
-
 
 class books {
     private String Name;
@@ -58,7 +91,7 @@ class books {
 
 class Admin {
 
-    public ArrayList<books> books = new ArrayList<>();
+    public ArrayList<books> Allbooks = new ArrayList<>();
 
     public void menu(Scanner input) {
         int Adminchoice = 0;
@@ -78,7 +111,7 @@ class Admin {
             Adminchoice = input.nextInt();
             switch (Adminchoice) {
                 case 1:
-                    addBook(input);    
+                    addBook(input);
                     break;
                 case 2:
                     removeBook(input);
@@ -126,7 +159,7 @@ class Admin {
     public void addBook(Scanner input) {
         books b = new books();
         b.set(input);
-        books.add(b);
+        Allbooks.add(b);
     }
 
     public void removeBook(Scanner input) {
@@ -135,7 +168,7 @@ class Admin {
         System.out.print("ENter Name of the book : ");
         n = input.nextLine();
 
-        Iterator<books> it = books.iterator();
+        Iterator<books> it = Allbooks.iterator();
         boolean found = false;
 
         while (it.hasNext()) {
@@ -159,7 +192,7 @@ class Admin {
         System.out.println("ENter name of the book : ");
         n = input.nextLine();
 
-        Iterator<books> it = books.iterator();
+        Iterator<books> it = Allbooks.iterator();
         boolean found = false;
         while (it.hasNext()) {
             books b = it.next();
