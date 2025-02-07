@@ -61,3 +61,33 @@ To use the Library Management System:
    ```bash
    git clone https://github.com/bhavy1204/Library-management-System-using-java.git
    cd Library-management-System-using-java
+   ```
+2. Compile and run the Java files using your preferred IDE or command-line tools.
+
+3. Follow the on-screen instructions to perform operations like adding books, issuing books, returning books, and managing members.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+
+1. Fork the repository.
+
+2. Create a new branch (git checkout -b feature/YourFeatureName).
+
+3. Commit your changes (git commit -m 'Add some feature').
+
+4. Push to the branch (git push origin feature/YourFeatureName).
+
+5. Open a pull request.
+
+Please ensure your code follows the project's coding standards and includes appropriate documentation.
+
+## Acknowledgements
+
+Java Documentation
+
+SHA-256 Hashing
+
+Git Documentation
+
+- **Note**: This project is still under development. Feel free to contribute or provide feedback to make it even better!
