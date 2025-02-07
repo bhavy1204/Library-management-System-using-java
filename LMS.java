@@ -2,13 +2,6 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-class library {
-    private int a = 10;
-
-    public void Greet() {
-        System.out.println("Hello " + a);
-    }
-}
 
 class User {
     private String userName;
@@ -17,6 +10,48 @@ class User {
     private String address;
 
     private ArrayList<books> borrowedBooks = new ArrayList<>();
+
+    void menu(String n,Scanner input, Admin admin){
+        int userChoice=0;
+        do {
+            System.out.println("Hello "+n +" ! What would you like to do ");
+            System.out.println("1. See Books ");
+            System.out.println("2. Borrow Books ");
+            System.out.println("3. See borrowed books ");
+            System.out.println("4. Update profile  ");
+            System.out.println("5. See My proile ");
+            System.out.println("6. Fill complain/suggestions ");
+            System.out.println("7. EXIT ");
+            System.out.print(">>> ");
+            userChoice= input.nextInt();
+            switch (userChoice) {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    
+                    break;
+                case 6:
+                    
+                    break;
+                case 7:
+                System.out.println("Exiting....");
+                    break;
+                default:
+                System.out.println("Please ENter a valid choice ");
+                    break;
+            }      
+        } while (userChoice!=7);
+    }
 
     void setDetails(Scanner input) {
         input.nextLine();
@@ -79,15 +114,15 @@ class books {
 
     void set(Scanner input) {
         input.nextLine();
-        System.out.println("Enter Name of Book : ");
+        System.out.print("Enter Name of Book : ");
         this.Name = input.nextLine();
-        System.out.println("Enter Author of Book : ");
+        System.out.print("Enter Author of Book : ");
         this.author = input.nextLine();
-        System.out.println("Enter price of Book : ");
+        System.out.print("Enter price of Book : ");
         this.price = input.nextFloat();
-        System.out.println("Enter ISBN of Book : ");
+        System.out.print("Enter ISBN of Book : ");
         this.ISBN = input.nextInt();
-        System.out.println("Enter Quantity of Book : ");
+        System.out.print("Enter Quantity of Book : ");
         this.quantity = input.nextInt();
     }
 
@@ -241,9 +276,9 @@ class Admin {
 public class LMS {
 
     public static void main(String args[]) {
-        library l = new library();
         Scanner input = new Scanner(System.in);
         Admin admin = new Admin();
+        User user = new User();
         // if ( admin.authenticate(input)) {
         // System.out.println("Access granted");
         // }else
@@ -298,6 +333,7 @@ public class LMS {
                     }
                     break;
                 case 2:
+                    
                     break;
                 case 3:
                     break;
