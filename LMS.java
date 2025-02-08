@@ -8,6 +8,7 @@ class User {
     private long contactNo;
     private String mail;
     private String address;
+    private String complaints;
 
     private ArrayList<books> borrowedBooks = new ArrayList<>();
 
@@ -26,22 +27,23 @@ class User {
             userChoice= input.nextInt();
             switch (userChoice) {
                 case 1:
-                    
+                    admin.viewBook(input);
                     break;
                 case 2:
-                    
+                    borrowBooks(input, admin);
                     break;
                 case 3:
-                    
+                    showBorrowedBooks();
                     break;
                 case 4:
-                    
+                    setDetails(input);
                     break;
                 case 5:
-                    
+                    showUserDetails();
                     break;
                 case 6:
-                    
+                    User temp=fillComplain(input);
+                    admin.Complaints.add(temp);
                     break;
                 case 7:
                 System.out.println("Exiting....");
@@ -51,6 +53,26 @@ class User {
                     break;
             }      
         } while (userChoice!=7);
+    }
+
+    User fillComplain(Scanner input){
+        User temp = new User();
+        temp.userName = this.userName;
+        temp.mail = this.mail;
+        temp.contactNo = this.contactNo;
+        temp.address = this.address;
+        System.out.print("Please ENter your issue >> ");
+        temp.complaints = input.nextLine();
+        return temp;
+    }
+
+
+    void userComplaints(){
+        System.out.println("Name : " + this.userName);
+        System.out.println("E-mail " + this.mail);
+        System.out.println("Contact number : " + this.contactNo);
+        System.out.println("Issue : " + this.complaints);
+        System.out.println("\n-------------------------------------------------------------");      
     }
 
     void setDetails(Scanner input) {
@@ -65,7 +87,7 @@ class User {
         this.contactNo = input.nextLong();
     }
 
-    void show() {
+    void showUserDetails() {
         System.out.println("Name : " + this.userName);
         System.out.println("E-mail " + this.mail);
         System.out.println("Contact number : " + this.contactNo);
@@ -153,7 +175,7 @@ class books {
 }
 
 class Admin {
-
+    public ArrayList<User> Complaints = new ArrayList<>();
     public ArrayList<books> Allbooks = new ArrayList<>();
 
     public void menu(Scanner input) {
@@ -164,6 +186,7 @@ class Admin {
             System.out.println("2. Remove Book(s) ");
             System.out.println("3. View book(s) ");
             System.out.println("4. See Due book(s) ");
+            System.out.println("4. View Complaints/Suggestion ");
             System.out.println("5. Exit ");
             System.out.print(">>> ");
             while (!input.hasNextInt()) {
@@ -218,6 +241,15 @@ class Admin {
         else
             return false;
     };
+
+
+    public void viewComplaints(){
+        Iterator<User> it = Complaints.iterator();    
+        while (it.hasNext()) {
+            User u = it.next();
+            u.userComplaints();
+        } 
+    }
 
     public void addBook(Scanner input) {
         books b = new books();
