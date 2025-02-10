@@ -2,6 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Java-17-blue.svg)
 ![Status](https://img.shields.io/badge/Status-Under%20Development-yellow)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 A **real-life relatable** Library Management System built using Java. This project is currently under development and aims to provide a secure and efficient way to manage library operations such as adding books, issuing books, returning books, and tracking inventory. It uses **SHA-256 hashing algorithms** to ensure password security, avoiding hard-coded credentials for enhanced safety.
 
